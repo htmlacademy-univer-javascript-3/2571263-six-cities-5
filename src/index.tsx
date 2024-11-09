@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './Components/App.tsx';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const offersCount = 312;
+
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <App offersCount={offersCount} />
   </React.StrictMode>
 );
