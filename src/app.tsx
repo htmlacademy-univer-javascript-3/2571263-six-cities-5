@@ -6,22 +6,24 @@ import OfferPage from './pages/offer-page.tsx';
 import NotFound from './not-found.tsx';
 import PrivateRoute from './components/private-route.tsx';
 import {AuthStatus} from './constants/auth-status.ts';
+import {AppRoute} from './constants/app-route.ts';
+import {OfferData} from './model/offer-data.ts';
 
 type AppProps = {
-  offersCount: number;
+  offers: OfferData[];
 }
 
-export default function App({offersCount}: AppProps) {
+export default function App({offers}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Route index element={<MainPage offersCount={offersCount} />}/>
-          <Route path="/login" element={<LoginPage />}/>
-          <PrivateRoute path="/favorites" element={<FavouritesPage />} authStatus={AuthStatus.Authenticated} />
-          <Route path="/offer/:id" element={<OfferPage />}/>
+        <Route path={AppRoute.Main}>
+          <Route index element={<MainPage offers={offers} />}/>
+          <Route path={AppRoute.Login} element={<LoginPage />}/>
+          <PrivateRoute path={AppRoute.Favorites} element={<FavouritesPage offers={offers} />} authStatus={AuthStatus.Authenticated} />
+          <Route path={AppRoute.Offer} element={<OfferPage offers={offers}/>}/>
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path={AppRoute.Other} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
