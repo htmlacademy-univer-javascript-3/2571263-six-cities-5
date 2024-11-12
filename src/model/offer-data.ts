@@ -1,4 +1,5 @@
 ﻿import {UserData} from './user.ts';
+import {Location} from './location.ts';
 
 export type OfferData = {
   id: string;
@@ -10,11 +11,7 @@ export type OfferData = {
   preview: string;
   title: string;
   residencyType: string;
-  location: {
-    latitude: number;
-    longitude: number;
-    name: string;
-  };
+  location: Location;
   bedroomCount: number;
   maxAdults: number;
   features: string[];

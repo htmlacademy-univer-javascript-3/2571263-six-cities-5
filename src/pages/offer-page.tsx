@@ -27,7 +27,7 @@ export default function OfferPage({offers}: OfferPageProps) {
           <div className="header__wrapper">
             <div className="header__left">
               <Link className="header__logo-link" to={AppRoute.Main}>
-                <img className="header__logo" src="../components/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="../../markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
             <nav className="header__nav">
@@ -134,7 +134,7 @@ export default function OfferPage({offers}: OfferPageProps) {
                   <li className="reviews__item">
                     <div className="reviews__user user">
                       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="../components/img/avatar-max.jpg" width="54" height="54"
+                        <img className="reviews__avatar user__avatar" src="../../markup/img/avatar-max.jpg" width="54" height="54"
                           alt="Reviews avatar"
                         />
                       </div>
