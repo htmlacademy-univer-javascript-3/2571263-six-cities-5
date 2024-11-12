@@ -2,6 +2,7 @@
 import CardList from '../components/card-list.tsx';
 import {OfferData} from '../model/offer-data.ts';
 import {CardType} from '../model/card-types.ts';
+import Map from '../components/map.tsx';
 
 type MainPageProps = {
   offers: OfferData[];
@@ -9,6 +10,7 @@ type MainPageProps = {
 
 export default function MainPage({ offers }: MainPageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const locations = offers.map((offer) => offer.location);
   return (
     <body>
       <div style={{display: 'none'}} id={hoveredId?.toString()}/>
@@ -18,7 +20,7 @@ export default function MainPage({ offers }: MainPageProps) {
             <div className="header__wrapper">
               <div className="header__left">
                 <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="../components/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                  <img className="header__logo" src="../../markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
                 </a>
               </div>
               <nav className="header__nav">
@@ -113,7 +115,9 @@ export default function MainPage({ offers }: MainPageProps) {
                   </div>
                 </section>}
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map location={locations[0]} points={locations} currentPoint={offers.find((offer) => offer.id === hoveredId)?.location} />
+                </section>
               </div>
             </div>
           </div>
