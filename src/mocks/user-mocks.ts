@@ -3,7 +3,7 @@
 export const UserMocks: UserData[] = [
   {
     name: 'Angelina',
-    avatar: '#',
+    avatar: 'https://url-to-image/image1.png',
     status: 'Pro'
   },
 ];

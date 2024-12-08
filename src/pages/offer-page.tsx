@@ -8,6 +8,8 @@ import ReviewForm from '../components/review-form.tsx';
 import CardList from '../components/card-list.tsx';
 import {CardType} from '../model/card-types.ts';
 import {useState} from 'react';
+import {ReviewList} from '../components/review-list.tsx';
+import Map from '../components/map.tsx';
 
 type OfferPageProps = {
   offers: OfferData[];
@@ -17,6 +19,7 @@ export default function OfferPage({offers}: OfferPageProps) {
   const params = useParams();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const offer = offers.find((o) => o.id === params.id);
+  const nearbyOffers = offers.filter((o) => o.id !== offer?.id);
   if (!offer) {
     return <NotFound />;
   }
@@ -74,7 +77,7 @@ export default function OfferPage({offers}: OfferPageProps) {
                 </h1>
                 <button className={`offer__bookmark-button ${offer.isFavorite ? 'offer__bookmark-button--active ' : ''}button`} type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
+                    <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">{offer.isFavorite ? 'Already in bookmarks' : 'Add to bookmarks'}</span>
                 </button>
@@ -129,44 +132,19 @@ export default function OfferPage({offers}: OfferPageProps) {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="../../markup/img/avatar-max.jpg" width="54" height="54"
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                      building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
+                <ReviewList reviews={offer.reviews} />
                 <ReviewForm />
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map">
+            <Map location={nearbyOffers[0].location} points={nearbyOffers.map((o) => o.location)} currentPoint={nearbyOffers.find((nearbyOffer) => nearbyOffer.id === hoveredId)?.location} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardList offers={offers} listType={CardType.NearPlaces} onItemHover={setHoveredId}/>
+            <CardList offers={nearbyOffers} listType={CardType.NearPlaces} onItemHover={setHoveredId} />
           </section>
         </div>
       </main>

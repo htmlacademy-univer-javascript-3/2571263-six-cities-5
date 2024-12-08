@@ -1,5 +1,6 @@
 ﻿import {UserData} from './user.ts';
 import {Location} from './location.ts';
+import {Review} from './review.ts';
 
 export type OfferData = {
   id: string;
@@ -17,5 +18,6 @@ export type OfferData = {
   features: string[];
   host: UserData;
   description: string[];
+  reviews: Review[];
 }
 

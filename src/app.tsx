@@ -23,7 +23,7 @@ export default function App({offers}: AppProps) {
           <Route element={<PrivateRoute authStatus={AuthStatus.Authenticated} />}>
             <Route path={AppRoute.Favorites} element={<FavouritesPage offers={offers} />} />
           </Route>
-          <Route path={AppRoute.Offer} element={<OfferPage offers={offers}/>}/>
+          <Route path={AppRoute.Offer} element={<OfferPage offers={offers} />}/>
         </Route>
         <Route path={AppRoute.Other} element={<NotFound />} />
       </Routes>

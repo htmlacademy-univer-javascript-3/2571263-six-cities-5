@@ -1,5 +1,6 @@
 ﻿import {OfferData} from '../model/offer-data.ts';
 import {UserMocks} from './user-mocks.ts';
+import {MockReviews} from './review-mocks.ts';
 
 export const OfferDataMocks: OfferData[] = [
   {
@@ -22,7 +23,8 @@ export const OfferDataMocks: OfferData[] = [
     host: UserMocks[0],
     images: ['https://14.design.htmlacademy.pro/static/hotel/4.jpg', 'https://14.design.htmlacademy.pro/static/hotel/5.jpg'],
     preview: 'https://14.design.htmlacademy.pro/static/hotel/1.jpg',
-    maxAdults: 4
+    maxAdults: 4,
+    reviews: MockReviews
   },
   {
     id: '2',
@@ -44,7 +46,8 @@ export const OfferDataMocks: OfferData[] = [
     host: UserMocks[0],
     images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/7.jpg'],
     preview: 'https://14.design.htmlacademy.pro/static/hotel/2.jpg',
-    maxAdults: 4
+    maxAdults: 4,
+    reviews: [ MockReviews[1] ]
   },
   {
     id: '3',
@@ -66,7 +69,8 @@ export const OfferDataMocks: OfferData[] = [
     host: UserMocks[0],
     images: ['https://14.design.htmlacademy.pro/static/hotel/2.jpg', 'https://14.design.htmlacademy.pro/static/hotel/8.jpg'],
     preview: 'https://14.design.htmlacademy.pro/static/hotel/3.jpg',
-    maxAdults: 4
+    maxAdults: 4,
+    reviews: MockReviews
   },
   {
     id: '4',
@@ -88,6 +92,7 @@ export const OfferDataMocks: OfferData[] = [
     host: UserMocks[0],
     images: ['https://14.design.htmlacademy.pro/static/hotel/5.jpg', 'https://14.design.htmlacademy.pro/static/hotel/6.jpg'],
     preview: 'https://14.design.htmlacademy.pro/static/hotel/4.jpg',
-    maxAdults: 4
+    maxAdults: 4,
+    reviews: [ MockReviews[0] ]
   },
 ];
