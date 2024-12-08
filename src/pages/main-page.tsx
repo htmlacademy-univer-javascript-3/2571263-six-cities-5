@@ -1,19 +1,21 @@
 ﻿import {useState} from 'react';
 import CardList from '../components/card-list.tsx';
-import {OfferData} from '../model/offer-data.ts';
 import {CardType} from '../model/card-types.ts';
 import Map from '../components/map.tsx';
+import CityTabs from '../components/cities.tsx';
+import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {switchCityAction} from '../store/actions.ts';
 
-type MainPageProps = {
-  offers: OfferData[];
-};
+export default function MainPage() {
+  const dispatch = useAppDispatch();
 
-export default function MainPage({ offers }: MainPageProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const offers = useAppSelector((state) => state.offers);
+  const selectedCity = useAppSelector((state) => state.city);
   const locations = offers.map((offer) => offer.location);
   return (
     <body>
-      <div style={{display: 'none'}} id={hoveredId?.toString()}/>
       <div className="page page--gray page--main">
         <header className="header">
           <div className="container">
@@ -46,48 +48,13 @@ export default function MainPage({ offers }: MainPageProps) {
 
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active">
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </div>
+          <CityTabs selectedCity={selectedCity} onTabClick={(cityName) => dispatch(switchCityAction(cityName))} />
           <div className="cities">
             <div className="cities__places-container container">
               {offers.length > 0 ?
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+                  <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex={0}>
@@ -110,7 +77,7 @@ export default function MainPage({ offers }: MainPageProps) {
                   <div className="cities__status-wrapper tabs__content">
                     <b className="cities__status">No places to stay available</b>
                     <p className="cities__status-description">We could not find any property available at the moment in
-                    Dusseldorf
+                      {selectedCity}
                     </p>
                   </div>
                 </section>}

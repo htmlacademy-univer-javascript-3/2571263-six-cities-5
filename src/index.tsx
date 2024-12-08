@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app.tsx';
 import {OfferDataMocks} from './mocks/offer-data-mocks.ts';
+import {Provider} from 'react-redux';
+import {store} from './store';
 
 
 const root = ReactDOM.createRoot(
@@ -10,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={OfferDataMocks} />
+    <Provider store={store}>
+      <App offers={OfferDataMocks} />
+    </Provider>
   </React.StrictMode>
 );
