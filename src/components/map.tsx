@@ -33,9 +33,8 @@ export default function Map({ location, points, currentPoint }: MapProps) {
 
   return (
     <div
-      style={{height: '500px'}}
+      style={{height: '100%', width: '100%'}}
       ref={mapRef}
-    >
-    </div>
+    />
   );
 }

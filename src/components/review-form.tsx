@@ -15,7 +15,7 @@ export default function ReviewForm() {
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} value={reviewData.rating} id="5-stars"
+        <input className="form__rating-input visually-hidden" name="rating" value={reviewData.rating} id="5-stars"
           type="radio" onChange={handleReviewChange}
         />
         <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
@@ -24,7 +24,7 @@ export default function ReviewForm() {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={4} value={reviewData.rating} id="4-stars"
+        <input className="form__rating-input visually-hidden" name="rating" value={reviewData.rating} id="4-stars"
           type="radio" onChange={handleReviewChange}
         />
         <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
@@ -33,7 +33,7 @@ export default function ReviewForm() {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={3} value={reviewData.rating} id="3-stars"
+        <input className="form__rating-input visually-hidden" name="rating" value={reviewData.rating} id="3-stars"
           type="radio" onChange={handleReviewChange}
         />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
@@ -42,7 +42,7 @@ export default function ReviewForm() {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={2} value={reviewData.rating} id="2-stars"
+        <input className="form__rating-input visually-hidden" name="rating" value={reviewData.rating} id="2-stars"
           type="radio" onChange={handleReviewChange}
         />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
@@ -51,7 +51,7 @@ export default function ReviewForm() {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" defaultValue={1} value={reviewData.rating} id="1-star"
+        <input className="form__rating-input visually-hidden" name="rating" value={reviewData.rating} id="1-star"
           type="radio" onChange={handleReviewChange}
         />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">

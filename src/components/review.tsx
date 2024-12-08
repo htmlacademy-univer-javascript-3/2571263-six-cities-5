@@ -2,9 +2,9 @@
 import {Rating} from './rating.tsx';
 import {RatingNester} from '../constants/rating-nesters.ts';
 
-type CommentItemProps = Review;
+type ReviewItemProps = Review;
 
-export function ReviewItem({user, rating, comment, date}: CommentItemProps){
+export function ReviewItem({user, rating, text, date}: ReviewItemProps){
   return(
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -20,8 +20,8 @@ export function ReviewItem({user, rating, comment, date}: CommentItemProps){
         <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
-        <Rating rating={rating} ratingNester={RatingNester.Review} isValueHidden/>
-        <p className="reviews__text">{comment}</p>
+        <Rating rating={rating} ratingNester={RatingNester.Review} isValueHidden />
+        <p className="reviews__text">{text}</p>
         <time className="reviews__time" dateTime={date}>{date}</time>
       </div>
     </li>

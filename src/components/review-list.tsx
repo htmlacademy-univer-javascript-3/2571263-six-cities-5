@@ -1,19 +1,19 @@
 ﻿import {Review} from '../model/review.ts';
 import {ReviewItem} from './review.tsx';
 
-type CommentListProps = {
+type ReviewListProps = {
   reviews: Review[];
 }
 
-export function CommentList({reviews}: CommentListProps) {
+export function ReviewList({reviews}: ReviewListProps) {
   return (
     <>
       <h2 className="reviews__title">
         Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviews.toSorted((f, s) =>
-          new Date(f.date).getTime() - new Date(s.date).getTime())
+        {reviews.toSorted((l, r) =>
+          new Date(l.date).getTime() - new Date(r.date).getTime())
           .map((c) => (
             <ReviewItem {...c} key={c.id}/>
           ))}
