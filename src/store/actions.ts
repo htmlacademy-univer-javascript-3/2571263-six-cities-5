@@ -14,7 +14,4 @@ export const requireAuthorizationAction = createAction<AuthStatus>('requireAutho
 
 export const setOffersLoadingStatusAction = createAction<boolean>('setOffersLoadingStatus');
 
-export const setUserAction = createAction<User>('setUser');
-
-export const clearUserAction = createAction('clearUser');
-
+export const setUserAction = createAction<User | null>('setUser');

@@ -7,8 +7,8 @@ import CityOffers from '../components/city-offers.tsx';
 export default function MainPage() {
   const dispatch = useAppDispatch();
 
-  const areOffersLoading = useAppSelector((state) => state.areOffersLoading);
-  const selectedCity = useAppSelector((state) => state.city);
+  const areOffersLoading = useAppSelector((state) => state.offers.areOffersLoading);
+  const selectedCity = useAppSelector((state) => state.city.city);
 
   return (
     <main className="page__main page__main--index">
