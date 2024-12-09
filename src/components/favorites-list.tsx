@@ -1,15 +1,15 @@
 ﻿import {Link} from 'react-router-dom';
-import {OfferData} from '../model/offer-data.ts';
+import {OfferCardData} from '../model/offer-data.ts';
 import CardList from './card-list.tsx';
 import {CardType} from '../model/card-types.ts';
 
 type FavoritesListProps = {
-  offers: OfferData[];
+  offers: OfferCardData[];
   onItemHover: (id: string | null) => void;
 };
 
 export function FavoritesList({offers, onItemHover}: FavoritesListProps){
-  const cities = Array.from(new Set(offers.map((o) => o.location.name).toSorted()));
+  const cities = Array.from(new Set(offers.map((o) => o.city.name).toSorted()));
 
   return (
     <ul className="favorites__list">

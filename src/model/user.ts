@@ -5,8 +5,13 @@
 
 export type UserData = {
   name: string;
-  avatar: string;
-  status: string;
+  avatarUrl: string;
+  isPro: string;
 };
+
+export type AuthData = {
+  login: string;
+  password: string;
+}
 
 export type User = UserData & UserCredentials;

@@ -1,21 +1,14 @@
-﻿import {useState} from 'react';
-import CardList from '../components/card-list.tsx';
-import {CardType} from '../model/card-types.ts';
-import Map from '../components/map.tsx';
-import CityTabs from '../components/cities.tsx';
+﻿import CityTabs from '../components/cities.tsx';
 import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {switchCityAction} from '../store/actions.ts';
-import SortingOptions from '../components/sorting-options.tsx';
-import {offersSelector} from '../store/selectors.ts';
+import Spinner from '../components/spinner/spinner.tsx';
+import OfferScreen from '../components/offer-screen.tsx';
 
 export default function MainPage() {
   const dispatch = useAppDispatch();
 
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
-  const offers = useAppSelector(offersSelector);
+  const areOffersLoading = useAppSelector((state) => state.areOffersLoading);
   const selectedCity = useAppSelector((state) => state.city);
-  const locations = offers.map((offer) => offer.location);
 
   return (
     <body>
@@ -54,30 +47,7 @@ export default function MainPage() {
           <CityTabs selectedCity={selectedCity} onTabClick={(cityName) => dispatch(switchCityAction(cityName))} />
           <div className="cities">
             <div className="cities__places-container container">
-              {offers.length > 0 ?
-                <>
-                  <section className="cities__places places">
-                    <h2 className="visually-hidden">Places</h2>
-                    <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
-                    <SortingOptions />
-                    <CardList offers={offers} listType={CardType.City} onItemHover={setHoveredId}/>
-                  </section>
-                  <div className="cities__right-section">
-                    <section className="cities__map map">
-                      <Map location={locations[0]} points={locations} currentPoint={offers.find((offer) => offer.id === hoveredId)?.location} />
-                    </section>
-                  </div>
-                </>
-                :
-                <>
-                  <section className="cities__no-places">
-                    <div className="cities__status-wrapper tabs__content">
-                      <b className="cities__status">No places to stay available</b>
-                      <p className="cities__status-description">We could not find any property available at the moment in {selectedCity}</p>
-                    </div>
-                  </section>
-                  <div className="cities__right-section" />
-                </>}
+              { areOffersLoading ? <Spinner /> : <OfferScreen selectedCity={selectedCity} /> }
             </div>
           </div>
         </main>

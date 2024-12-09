@@ -1,15 +1,12 @@
-﻿import {OfferData} from '../model/offer-data.ts';
+﻿import {OfferCardData} from '../model/offer-data.ts';
 import {useState} from 'react';
 import {FavoritesList} from '../components/favorites-list.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../constants/app-route.ts';
 
-type FavoriteProps = {
-  offers: OfferData[];
-}
-
-export default function FavouritesPage({offers}: FavoriteProps) {
+export default function FavouritesPage() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const offers: OfferCardData[] = null;
 
   return (
     <div className="page">

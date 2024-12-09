@@ -14,5 +14,5 @@ export const offersSelector = createSelector(
     (state: State) => state.city,
   ],
   (offers, order, city) =>
-    offers.filter((o) => o.location.name === city).sort(sortingOrders[order])
+    offers.filter((o) => o.city.name === city).sort(sortingOrders[order])
 );

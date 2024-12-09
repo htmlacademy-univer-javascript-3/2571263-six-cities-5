@@ -1,23 +1,26 @@
 ﻿import {UserData} from './user.ts';
 import {Location} from './location.ts';
-import {Review} from './review.ts';
+import {City} from './city.ts';
 
-export type OfferData = {
+export type OfferCardData = {
   id: string;
-  isPremium?: boolean;
-  isFavorite?: boolean;
+  title: string;
+  type: string;
   price: number;
+  city: City;
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
   rating: number;
   images: string[];
-  preview: string;
-  title: string;
-  residencyType: string;
-  location: Location;
-  bedroomCount: number;
-  maxAdults: number;
-  features: string[];
-  host: UserData;
-  description: string[];
-  reviews: Review[];
+  previewImage: string;
 }
 
+export type OfferPageData = OfferCardData & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: UserData;
+  images: string[];
+  maxAdults: number;
+}
