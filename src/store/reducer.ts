@@ -1,20 +1,22 @@
 ﻿import {createReducer} from '@reduxjs/toolkit';
 import {
-  changeSortingOrderAction,
+  changeSortingOrderAction, clearUserAction,
   fillOffersAction,
   requireAuthorizationAction,
-  setOffersLoadingStatusAction,
+  setOffersLoadingStatusAction, setUserAction,
   switchCityAction
 } from './actions.ts';
 import {OfferCardData} from '../model/offer-data.ts';
 import {SortingOrder} from '../constants/sorting-order.ts';
 import {AuthStatus} from '../constants/auth-status.ts';
+import {User} from '../model/user.ts';
 
 type State = {
   city: string;
   offers: OfferCardData[];
   order: SortingOrder;
   authStatus: AuthStatus;
+  user?: User;
   areOffersLoading: boolean;
 };
 
@@ -42,6 +44,12 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersLoadingStatusAction, (state, action) => {
       state.areOffersLoading = action.payload;
+    })
+    .addCase(setUserAction, (state, action) => {
+      state.user = action.payload;
+    })
+    .addCase(clearUserAction, (state) => {
+      state.user = undefined;
     });
 });
 

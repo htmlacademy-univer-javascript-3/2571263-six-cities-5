@@ -26,8 +26,10 @@ export default function useMap(mapRef: MutableRefObject<null>, location: Locatio
 
       setMap(instance);
       isRenderedRef.current = true;
+    } else {
+      map?.setView([location.latitude, location.longitude], location.zoom);
     }
-  }, [mapRef, location]);
+  }, [map, mapRef, location]);
 
   return map;
 }
