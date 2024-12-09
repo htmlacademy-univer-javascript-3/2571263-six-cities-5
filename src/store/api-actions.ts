@@ -4,9 +4,15 @@ import {AppDispatch, State} from './state';
 import {saveToken, dropToken} from '../services/token';
 import {OfferCardData} from '../model/offer-data.ts';
 import {APIRoute} from '../constants/api-route.ts';
-import {fillOffersAction, requireAuthorizationAction, setOffersLoadingStatusAction} from './actions.ts';
+import {
+  clearUserAction,
+  fillOffersAction,
+  requireAuthorizationAction,
+  setOffersLoadingStatusAction,
+  setUserAction
+} from './actions.ts';
 import {AuthStatus} from '../constants/auth-status.ts';
-import {AuthData, UserCredentials} from '../model/user.ts';
+import {AuthData, User, UserCredentials} from '../model/user.ts';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -30,8 +36,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      const {data: user} = await api.get<User>(APIRoute.Login);
       dispatch(requireAuthorizationAction(AuthStatus.Authenticated));
+      dispatch(setUserAction(user));
     } catch {
       dispatch(requireAuthorizationAction(AuthStatus.Unauthenticated));
     }
@@ -61,5 +68,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorizationAction(AuthStatus.Unauthenticated));
+    dispatch(clearUserAction());
   },
 );

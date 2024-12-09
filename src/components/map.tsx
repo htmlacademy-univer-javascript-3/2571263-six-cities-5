@@ -1,5 +1,5 @@
 ﻿import {useEffect, useRef} from 'react';
-import leaflet from 'leaflet';
+import leaflet, {layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../hooks/use-map.ts';
 import {Location} from '../model/location.ts';
@@ -16,6 +16,7 @@ export default function Map({ location, points, currentPoint }: MapProps) {
   const map = useMap(mapRef, location);
   useEffect(() => {
     if (map) {
+      const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {
         leaflet
           .marker({
@@ -26,8 +27,12 @@ export default function Map({ location, points, currentPoint }: MapProps) {
               ? CustomIcons.current
               : CustomIcons.default,
           })
-          .addTo(map);
+          .addTo(markerLayer);
       });
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
     }
   }, [map, points, currentPoint]);
 

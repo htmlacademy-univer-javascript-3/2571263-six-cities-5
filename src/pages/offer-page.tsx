@@ -22,7 +22,7 @@ export default function OfferPage() {
     return <NotFound />;
   }
   return (
-    <div className="page" id={hoveredId?.toString()}>
+    <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
