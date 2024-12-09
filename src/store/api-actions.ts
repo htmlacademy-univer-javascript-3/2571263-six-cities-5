@@ -5,7 +5,6 @@ import {saveToken, dropToken} from '../services/token';
 import {OfferCardData} from '../model/offer-data.ts';
 import {APIRoute} from '../constants/api-route.ts';
 import {
-  clearUserAction,
   fillOffersAction,
   requireAuthorizationAction,
   setOffersLoadingStatusAction,
@@ -68,6 +67,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorizationAction(AuthStatus.Unauthenticated));
-    dispatch(clearUserAction());
+    dispatch(setUserAction(null));
   },
 );

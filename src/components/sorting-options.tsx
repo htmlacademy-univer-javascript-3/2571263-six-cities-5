@@ -7,7 +7,7 @@ export default function SortingOptions() {
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
-  const selectedOrder = useAppSelector((state) => state.order);
+  const selectedOrder = useAppSelector((state) => state.offers.order);
 
   return (
     <form className="places__sorting" action="#" method="get">

@@ -8,7 +8,7 @@ type PrivateRouteProps = {
 };
 
 export default function PrivateRoute({redirect}: PrivateRouteProps) {
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
   return authStatus === AuthStatus.Authenticated
     ? <Outlet />
     : <Navigate to={redirect ?? AppRoute.Login} />;
