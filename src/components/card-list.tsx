@@ -1,9 +1,9 @@
 ﻿import OfferCard from './offer-card.tsx';
-import {OfferData} from '../model/offer-data.ts';
+import {OfferCardData} from '../model/offer-data.ts';
 import {CardType} from '../model/card-types.ts';
 
 type CardListProps = {
-  offers: OfferData[];
+  offers: OfferCardData[];
   listType: CardType;
   onItemHover?: (id: string | null) => void;
 }

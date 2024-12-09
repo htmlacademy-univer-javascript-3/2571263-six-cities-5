@@ -1,5 +1,5 @@
 ﻿import {Link, useParams} from 'react-router-dom';
-import {OfferData} from '../model/offer-data.ts';
+import {OfferCardData, OfferPageData} from '../model/offer-data.ts';
 import {AppRoute} from '../constants/app-route.ts';
 import NotFound from '../not-found.tsx';
 import {Rating} from '../components/rating.tsx';
@@ -10,16 +10,14 @@ import {CardType} from '../model/card-types.ts';
 import {useState} from 'react';
 import {ReviewList} from '../components/review-list.tsx';
 import Map from '../components/map.tsx';
+import {Review} from '../model/review.ts';
 
-type OfferPageProps = {
-  offers: OfferData[];
-}
-
-export default function OfferPage({offers}: OfferPageProps) {
+export default function OfferPage() {
   const params = useParams();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const offer = offers.find((o) => o.id === params.id);
-  const nearbyOffers = offers.filter((o) => o.id !== offer?.id);
+  const offer: OfferPageData = null; // offers.find((o) => o.id === params.id);
+  const nearbyOffers: OfferCardData[] = null; //offers.filter((o) => o.id !== offer?.id);
+  const reviews: Review[] = null;
   if (!offer) {
     return <NotFound />;
   }
@@ -85,10 +83,10 @@ export default function OfferPage({offers}: OfferPageProps) {
               <Rating rating={offer.rating} ratingNester={RatingNester.OfferPage} />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offer.residencyType}
+                  {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offer.bedroomCount} Bedroom{offer.bedroomCount > 1 ? 's' : ''}
+                  {offer.bedrooms} Bedroom{offer.bedrooms > 1 ? 's' : ''}
                 </li>
                 <li className="offer__feature offer__feature--adults">
                   Max {offer.maxAdults} adult{offer.maxAdults > 1 ? 's' : ''}
@@ -101,7 +99,7 @@ export default function OfferPage({offers}: OfferPageProps) {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {offer.features.map((f) => (
+                  {offer.goods.map((f) => (
                     <li className="offer__inside-item" key={f}>
                       {f}
                     </li>
@@ -112,27 +110,26 @@ export default function OfferPage({offers}: OfferPageProps) {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src={offer.host.avatar} width="74" height="74"
+                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="offer__user-name">
                     {offer.host.name}
                   </span>
-                  <span className="offer__user-status">
-                    {offer.host.status}
-                  </span>
+                  {offer.host.isPro &&
+                    <span className="offer__user-status">
+                    Pro
+                    </span>}
                 </div>
                 <div className="offer__description">
-                  {offer.description.map((p) => (
-                    <p className="offer__text" key={p.slice(0, 10)}>
-                      {p}
-                    </p>
-                  ))}
+                  <p className="offer__text">
+                    {offer.description}
+                  </p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <ReviewList reviews={offer.reviews} />
+                <ReviewList reviews={reviews} />
                 <ReviewForm />
               </section>
             </div>

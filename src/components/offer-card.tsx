@@ -1,4 +1,4 @@
-﻿import {OfferData} from '../model/offer-data.ts';
+﻿import {OfferCardData} from '../model/offer-data.ts';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../constants/app-route.ts';
 import {CardType} from '../model/card-types.ts';
@@ -6,7 +6,7 @@ import {Rating} from './rating.tsx';
 import {RatingNester} from '../constants/rating-nesters.ts';
 
 type OfferCardProps = {
-  offerData: OfferData;
+  offerData: OfferCardData;
   cardType: CardType;
   onHover: (id: string | null) => void;
   width: number;
@@ -29,7 +29,7 @@ export default function OfferCard({offerData, cardType, width, height, onHover}:
         <Link to={offerPage}>
           <img
             className="place-card__image"
-            src={offerData.preview}
+            src={offerData.previewImage}
             width={width}
             height={height}
             alt="Place image"
@@ -53,7 +53,7 @@ export default function OfferCard({offerData, cardType, width, height, onHover}:
         <h2 className="place-card__name">
           <Link to={offerPage}>{offerData.title}</Link>
         </h2>
-        <p className="place-card__type">{offerData.residencyType}</p>
+        <p className="place-card__type">{offerData.type}</p>
       </div>
     </article>
   );
