@@ -3,5 +3,5 @@
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
-  Other = '*'
+  NotFound = '*'
 }

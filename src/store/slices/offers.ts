@@ -1,9 +1,4 @@
-﻿import { createSlice } from '@reduxjs/toolkit';
-import {
-  changeSortingOrderAction,
-  fillOffersAction,
-  setOffersLoadingStatusAction,
-} from '../actions.ts';
+﻿import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {OfferCardData} from '../../model/offer-data.ts';
 import {SortingOrder} from '../../constants/sorting-order.ts';
 
@@ -20,19 +15,18 @@ const initialState: OffersState = {
 export const offersSlice = createSlice({
   name: 'offers',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fillOffersAction, (state, action) => {
-        state.offers = action.payload;
-      })
-      .addCase(changeSortingOrderAction, (state, action) => {
-        state.order = action.payload;
-      })
-      .addCase(setOffersLoadingStatusAction, (state, action) => {
-        state.areOffersLoading = action.payload;
-      });
+  reducers: {
+    fillOffers(state, action: PayloadAction<OfferCardData[]>) {
+      state.offers = action.payload;
+    },
+    changeSortingOrder(state, action: PayloadAction<SortingOrder>) {
+      state.order = action.payload;
+    },
+    setOffersLoadingStatus(state, action: PayloadAction<boolean>) {
+      state.areOffersLoading = action.payload;
+    }
   }
 });
 
+export const { fillOffers, changeSortingOrder, setOffersLoadingStatus } = offersSlice.actions;
 export const offersReducer = offersSlice.reducer;

@@ -29,7 +29,7 @@ export default function App() {
           </Route>
           <Route path={AppRoute.Offer} element={<OfferPage />}/>
         </Route>
-        <Route path={AppRoute.Other} element={<NotFound />} />
+        <Route path={AppRoute.NotFound} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

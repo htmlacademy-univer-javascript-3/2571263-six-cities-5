@@ -1,7 +1,7 @@
 ﻿import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {useState} from 'react';
 import {SortingOrder, sortingOrders} from '../constants/sorting-order.ts';
-import {changeSortingOrderAction} from '../store/actions.ts';
+import {changeSortingOrder} from '../store/slices/offers.ts';
 
 export default function SortingOptions() {
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ export default function SortingOptions() {
             className={`places__option${order === selectedOrder ? ' places__option--active' : ''}`}
             tabIndex={0}
             onClick={() => {
-              dispatch(changeSortingOrderAction(order as SortingOrder));
+              dispatch(changeSortingOrder(order as SortingOrder));
               setIsOpen(false);
             }}
           >
