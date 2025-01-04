@@ -12,6 +12,7 @@ import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
 import {fetchCurrentOfferAction} from '../store/api-actions.ts';
 import Spinner from '../components/spinner/spinner.tsx';
 import {AuthStatus} from '../constants/auth-status.ts';
+import {OfferBookmark} from '../components/bookmark.tsx';
 
 export default function OfferPage() {
   const navigate = useNavigate();
@@ -63,18 +64,7 @@ export default function OfferPage() {
               <h1 className="offer__name">
                 {offer!.title}
               </h1>
-              <button
-                className={`offer__bookmark-button ${offer!.isFavorite ? 'offer__bookmark-button--active ' : ''}button`}
-                type="button"
-              >
-                <svg className="offer__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"/>
-                </svg>
-                <span
-                  className="visually-hidden"
-                >{offer!.isFavorite ? 'Already in bookmarks' : 'Add to bookmarks'}
-                </span>
-              </button>
+              <OfferBookmark offerId={offer!.id} isFavourite={offer?.isFavorite || false} />
             </div>
             <Rating rating={offer!.rating} ratingNester={RatingNester.OfferPage}/>
             <ul className="offer__features">

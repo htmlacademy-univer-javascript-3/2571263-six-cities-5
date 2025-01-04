@@ -7,7 +7,7 @@ import NotFound from './not-found.tsx';
 import PrivateRoute from './components/private-route.tsx';
 import {AppRoute} from './constants/app-route.ts';
 import {useEffect} from 'react';
-import {checkAuthAction, fetchOffersAction} from './store/api-actions.ts';
+import {checkAuthAction, fetchFavoritesAction, fetchOffersAction} from './store/api-actions.ts';
 import {useAppDispatch} from './store/hooks.ts';
 import Layout from './components/layout.tsx';
 
@@ -16,6 +16,7 @@ export default function App() {
   useEffect(() => {
     dispatch(checkAuthAction());
     dispatch(fetchOffersAction());
+    dispatch(fetchFavoritesAction());
   });
 
   return (

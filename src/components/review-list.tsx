@@ -13,7 +13,8 @@ export function ReviewList({reviews}: ReviewListProps) {
       </h2>
       <ul className="reviews__list">
         {reviews.toSorted((l, r) =>
-          new Date(l.date).getTime() - new Date(r.date).getTime())
+          new Date(r.date).getTime() - new Date(l.date).getTime())
+          .slice(0, 10)
           .map((c) => (
             <ReviewItem {...c} key={c.id}/>
           ))}
