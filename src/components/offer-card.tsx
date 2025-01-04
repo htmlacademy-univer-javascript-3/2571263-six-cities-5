@@ -8,7 +8,7 @@ import {RatingNester} from '../constants/rating-nesters.ts';
 type OfferCardProps = {
   offerData: OfferCardData;
   cardType: CardType;
-  onHover: (id: string | null) => void;
+  onHover?: (id: string | null) => void;
   width: number;
   height: number;
 }
@@ -18,8 +18,8 @@ export default function OfferCard({offerData, cardType, width, height, onHover}:
 
   return (
     <article className={`${cardType}__card place-card`}
-      onMouseOver={() => onHover(offerData.id)}
-      onMouseLeave={() => onHover(null)}
+      onMouseOver={onHover ? () => onHover(offerData.id) : undefined}
+      onMouseLeave={onHover ? () => onHover(null) : undefined}
     >
       {offerData.isPremium &&
         <div className="place-card__mark">

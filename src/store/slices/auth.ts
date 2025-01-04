@@ -1,7 +1,6 @@
 ﻿import {AuthStatus} from '../../constants/auth-status.ts';
 import {User} from '../../model/user.ts';
-import { createSlice } from '@reduxjs/toolkit';
-import {requireAuthorizationAction, setUserAction} from '../actions.ts';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 type AuthState = {
   authStatus: AuthStatus;
@@ -14,16 +13,16 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(requireAuthorizationAction, (state, action) => {
-        state.authStatus = action.payload;
-      })
-      .addCase(setUserAction, (state, action) => {
-        state.user = action.payload;
-      });
+  reducers: {
+    requireAuthorization(state, action: PayloadAction<AuthStatus>) {
+      state.authStatus = action.payload;
+    },
+    setUser(state, action: PayloadAction<User | null>) {
+      state.user = action.payload;
+    },
   }
 });
+
+export const { requireAuthorization, setUser } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

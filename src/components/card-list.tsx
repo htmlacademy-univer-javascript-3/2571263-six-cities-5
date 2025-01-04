@@ -35,7 +35,7 @@ export default function CardList({offers, listType, onItemHover}: CardListProps)
           width={width}
           height={height}
           cardType={listType}
-          onHover={(id) => onItemHover && onItemHover(id)}
+          onHover={onItemHover}
         />
       ))}
     </div>
