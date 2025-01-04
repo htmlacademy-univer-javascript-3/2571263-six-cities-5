@@ -1,4 +1,4 @@
-﻿import {cities} from '../constants/cities.ts';
+﻿import {CITIES} from '../constants/cities.ts';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../constants/app-route.ts';
 
@@ -12,7 +12,7 @@ export default function CityTabs({ selectedCity, onTabClick }: cityTabsProps) {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((cityName) => (
+          {CITIES.map((cityName) => (
             <li className="locations__item" key={cityName}>
               <Link
                 to={AppRoute.Main}

@@ -1,15 +1,15 @@
 ﻿import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import MainPage from './pages/main-page.tsx';
-import LoginPage from './pages/login-page.tsx';
-import FavouritesPage from './pages/favourites-page.tsx';
-import OfferPage from './pages/offer-page.tsx';
-import NotFound from './not-found.tsx';
-import PrivateRoute from './components/private-route.tsx';
-import {AppRoute} from './constants/app-route.ts';
+import MainPage from '../pages/main-page.tsx';
+import LoginPage from '../pages/login-page.tsx';
+import FavouritesPage from '../pages/favourites-page.tsx';
+import OfferPage from '../pages/offer-page.tsx';
+import NotFoundPage from '../pages/not-found-page.tsx';
+import PrivateRoute from './private-route.tsx';
+import {AppRoute} from '../constants/app-route.ts';
 import {useEffect} from 'react';
-import {checkAuthAction, fetchFavoritesAction, fetchOffersAction} from './store/api-actions.ts';
-import {useAppDispatch} from './store/hooks.ts';
-import Layout from './components/layout.tsx';
+import {checkAuthAction, fetchFavoritesAction, fetchOffersAction} from '../store/api-actions.ts';
+import {useAppDispatch} from '../hooks/store-hooks.ts';
+import Layout from './layout.tsx';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ export default function App() {
           </Route>
           <Route path={AppRoute.Offer} element={<OfferPage />}/>
         </Route>
-        <Route path={AppRoute.NotFound} element={<NotFound />} />
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 ﻿import CityTabs from '../components/cities.tsx';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../hooks/store-hooks.ts';
 import Spinner from '../components/spinner/spinner.tsx';
 import CityOffers from '../components/city-offers.tsx';
 import {switchCity} from '../store/slices/city.ts';

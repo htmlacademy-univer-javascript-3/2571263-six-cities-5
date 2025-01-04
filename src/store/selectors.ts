@@ -1,4 +1,4 @@
-﻿import {sortingOrders} from '../constants/sorting-order.ts';
+﻿import {SortingOrders} from '../constants/sorting-order.ts';
 import {State} from './state.ts';
 import {createSelector} from '@reduxjs/toolkit';
 
@@ -9,5 +9,5 @@ export const offersSelector = createSelector(
     (state: State) => state.city.city,
   ],
   (offers, order, city) =>
-    offers.filter((o) => o.city.name === city).sort(sortingOrders[order])
+    offers.filter((o) => o.city.name === city).sort(SortingOrders[order])
 );

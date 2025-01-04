@@ -8,7 +8,7 @@ import {CardType} from '../model/card-types.ts';
 import {useEffect, useState} from 'react';
 import {ReviewList} from '../components/review-list.tsx';
 import Map from '../components/map.tsx';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../hooks/store-hooks.ts';
 import {fetchCurrentOfferAction} from '../store/api-actions.ts';
 import Spinner from '../components/spinner/spinner.tsx';
 import {AuthStatus} from '../constants/auth-status.ts';

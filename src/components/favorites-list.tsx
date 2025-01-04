@@ -1,7 +1,7 @@
 ﻿import {Link} from 'react-router-dom';
 import CardList from './card-list.tsx';
 import {CardType} from '../model/card-types.ts';
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppSelector} from '../hooks/store-hooks.ts';
 
 export function FavoritesList(){
   const offers = useAppSelector((state) => state.offers.favourites);

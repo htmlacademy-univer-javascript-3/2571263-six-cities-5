@@ -1,7 +1,7 @@
 ﻿import {AppRoute} from '../constants/app-route.ts';
 import {Link, useNavigate} from 'react-router-dom';
 import React, {FormEvent, useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../hooks/store-hooks.ts';
 import {AuthStatus} from '../constants/auth-status.ts';
 import {AuthData} from '../model/user.ts';
 import {loginAction} from '../store/api-actions.ts';

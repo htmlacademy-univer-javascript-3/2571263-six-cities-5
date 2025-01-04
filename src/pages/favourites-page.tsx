@@ -1,5 +1,5 @@
 ﻿import {FavoritesList} from '../components/favorites-list.tsx';
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppSelector} from '../hooks/store-hooks.ts';
 
 export default function FavouritesPage() {
   const favouritesCount = useAppSelector((state) => state.offers.favourites.length);
