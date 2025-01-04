@@ -13,6 +13,7 @@ export default function Header() {
   };
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const user = useAppSelector((state) => state.auth.user);
+  const favouritesCount = useAppSelector((state) => state.offers.favourites.length);
 
   return (
     <header className="header">
@@ -30,7 +31,7 @@ export default function Header() {
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper"/>
                     <span className="header__user-name user__name">{user?.email}</span>
-                    <span className="header__favorite-count">{0}</span>
+                    <span className="header__favorite-count">{favouritesCount}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">

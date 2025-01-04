@@ -6,6 +6,7 @@ import {useState} from 'react';
 import {useAppSelector} from '../store/hooks.ts';
 import {offersSelector} from '../store/selectors.ts';
 import cn from 'classnames';
+import MainEmpty from './main-empty.tsx';
 
 type OfferScreenProps = {
   selectedCity: string;
@@ -38,16 +39,6 @@ export default function CityOffers({ selectedCity }: OfferScreenProps) {
           </div>
         </>
         :
-        <>
-          <section className="cities__no-places">
-            <div className="cities__status-wrapper tabs__content">
-              <b className="cities__status">No places to stay available</b>
-              <p className="cities__status-description">We could not find any property available at the moment
-            in {selectedCity}
-              </p>
-            </div>
-          </section>
-          <div className="cities__right-section"/>
-        </>}
+        <MainEmpty />}
     </div>);
 }

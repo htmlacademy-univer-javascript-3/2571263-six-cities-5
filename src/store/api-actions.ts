@@ -9,9 +9,15 @@ import {AuthData, User, UserCredentials} from '../model/user.ts';
 import JoinUrls from '../services/join-urls.ts';
 import {Review} from '../model/review.ts';
 
-import {fillNearbyOffers, fillReviews, setCurrentOffer} from './slices/current-offer.ts';
+import {
+  changeCurrentOfferFavouriteStatus,
+  changeNearbyFavouriteStatus,
+  fillNearbyOffers,
+  fillReviews,
+  setCurrentOffer
+} from './slices/current-offer.ts';
 import {requireAuthorization, setUser} from './slices/auth.ts';
-import {fillOffers, setOffersLoadingStatus} from './slices/offers.ts';
+import {changeFavoriteStatus, fillFavourites, fillOffers, setOffersLoadingStatus} from './slices/offers.ts';
 
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -25,7 +31,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<OfferCardData[]>(APIRoute.Offers);
     dispatch(fillOffers(data));
     dispatch(setOffersLoadingStatus(false));
-  },
+  }
+);
+
+export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+  'fetchFavourites',
+  async (_arg, {dispatch, getState, rejectWithValue, extra: api}) => {
+    if (getState().auth.authStatus !== AuthStatus.Authenticated) {
+      return rejectWithValue('Unauthorized');
+    }
+    const {data: favourites} = await api.get<OfferCardData[]>(APIRoute.Favourites);
+    dispatch(fillFavourites(favourites));
+  }
 );
 
 export const fetchCurrentOfferAction = createAsyncThunk<OfferPageData | null, string, {
@@ -42,7 +63,7 @@ export const fetchCurrentOfferAction = createAsyncThunk<OfferPageData | null, st
     const {data: reviews} = await api.get<Review[]>(JoinUrls(APIRoute.Reviews, offerId));
     dispatch(fillReviews(reviews));
     return offer;
-  },
+  }
 );
 
 export const sendReviewAction = createAsyncThunk<
@@ -63,8 +84,34 @@ export const sendReviewAction = createAsyncThunk<
     }
     const offerId = getState().currentOffer.currentOffer!.id;
     const {data: review} = await api.post<Review>(JoinUrls(APIRoute.Reviews, offerId), {rating, comment});
-    dispatch(fillReviews([...getState().currentOffer.reviews,review]));
+    dispatch(fillReviews([...getState().currentOffer.reviews, review]));
+  }
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk<
+  void,
+  {
+    offerId: string;
+    isFavourite: boolean;
   },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+  'changeFavouriteStatus',
+  async ({ offerId, isFavourite }, { dispatch, getState, rejectWithValue, extra: api }) => {
+    if (getState().auth.authStatus !== AuthStatus.Authenticated) {
+      return rejectWithValue('Unauthorized');
+    }
+    const {data: offer} = await api.post<OfferCardData>(
+      JoinUrls(APIRoute.Favourites, offerId, Number(isFavourite).toString())
+    );
+    const favouriteData = { offerId, isFavourite: offer.isFavorite };
+    dispatch(changeFavoriteStatus(favouriteData));
+    dispatch(changeNearbyFavouriteStatus(favouriteData));
+    dispatch(changeCurrentOfferFavouriteStatus(favouriteData));
+  }
 );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -81,7 +128,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     } catch {
       dispatch(requireAuthorization(AuthStatus.Unauthenticated));
     }
-  },
+  }
 );
 
 export const loginAction = createAsyncThunk<void, AuthData, {
@@ -95,7 +142,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(requireAuthorization(AuthStatus.Authenticated));
     dispatch(checkAuthAction());
-  },
+  }
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
@@ -109,5 +156,5 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dropToken();
     dispatch(requireAuthorization(AuthStatus.Unauthenticated));
     dispatch(setUser(null));
-  },
+  }
 );

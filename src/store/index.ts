@@ -11,7 +11,7 @@ export const store = configureStore({
     city: cityReducer,
     offers: offersReducer,
     currentOffer: currentOfferReducer,
-    auth: authReducer,
+    auth: authReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
