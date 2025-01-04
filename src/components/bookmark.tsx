@@ -1,5 +1,5 @@
 ﻿import cn from 'classnames';
-import {useAppDispatch} from '../store/hooks.ts';
+import {useAppDispatch} from '../hooks/store-hooks.ts';
 import {useNavigate} from 'react-router-dom';
 import {AppRoute} from '../constants/app-route.ts';
 import {changeFavoriteStatusAction} from '../store/api-actions.ts';

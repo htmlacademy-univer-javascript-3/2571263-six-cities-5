@@ -1,4 +1,4 @@
-﻿import {useAppSelector} from '../store/hooks.ts';
+﻿import {useAppSelector} from '../hooks/store-hooks.ts';
 
 export default function MainEmpty() {
   const selectedCity = useAppSelector((state) => state.city.city);

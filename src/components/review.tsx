@@ -1,7 +1,7 @@
 ﻿import {Review} from '../model/review.ts';
 import {Rating} from './rating.tsx';
 import {RatingNester} from '../constants/rating-nesters.ts';
-import {months} from '../constants/months.ts';
+import {MONTHS} from '../constants/months.ts';
 
 type ReviewItemProps = Review;
 
@@ -24,7 +24,7 @@ export function ReviewItem({user, rating, comment, date}: ReviewItemProps){
       <div className="reviews__info">
         <Rating rating={rating} ratingNester={RatingNester.Review} isValueHidden />
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime={date}>{months[dateDate.getMonth()]} {dateDate.getFullYear()}</time>
+        <time className="reviews__time" dateTime={date}>{MONTHS[dateDate.getMonth()]} {dateDate.getFullYear()}</time>
       </div>
     </li>
   );

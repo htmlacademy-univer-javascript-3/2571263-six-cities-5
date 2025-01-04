@@ -3,7 +3,7 @@ import CardList from './card-list.tsx';
 import {CardType} from '../model/card-types.ts';
 import Map from './map.tsx';
 import {useState} from 'react';
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppSelector} from '../hooks/store-hooks.ts';
 import {offersSelector} from '../store/selectors.ts';
 import cn from 'classnames';
 import MainEmpty from './main-empty.tsx';

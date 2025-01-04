@@ -24,8 +24,8 @@ export default function Map({ location, points, currentPoint }: MapProps) {
             lng: point.longitude,
           }, {
             icon: point.latitude === currentPoint?.latitude && point.longitude === currentPoint?.longitude
-              ? CustomIcons.current
-              : CustomIcons.default,
+              ? CustomIcons.Current
+              : CustomIcons.Default,
           })
           .addTo(markerLayer);
       });

@@ -1,6 +1,6 @@
-﻿import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
+﻿import {useAppDispatch, useAppSelector} from '../hooks/store-hooks.ts';
 import {useState} from 'react';
-import {SortingOrder, sortingOrders} from '../constants/sorting-order.ts';
+import {SortingOrder, SortingOrders} from '../constants/sorting-order.ts';
 import {changeSortingOrder} from '../store/slices/offers.ts';
 
 export default function SortingOptions() {
@@ -19,7 +19,7 @@ export default function SortingOptions() {
         </svg>
       </span>
       <ul className={`places__options places__options--custom${ isOpen ? ' places__options--opened' : ''}`}>
-        {Object.keys(sortingOrders).map((order) => (
+        {Object.keys(SortingOrders).map((order) => (
           <li
             key={order}
             className={`places__option${order === selectedOrder ? ' places__option--active' : ''}`}

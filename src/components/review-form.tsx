@@ -1,5 +1,5 @@
 ﻿import React, {FormEvent, useRef, useState} from 'react';
-import {useAppDispatch} from '../store/hooks.ts';
+import {useAppDispatch} from '../hooks/store-hooks.ts';
 import {sendReviewAction} from '../store/api-actions.ts';
 
 export default function ReviewForm() {
