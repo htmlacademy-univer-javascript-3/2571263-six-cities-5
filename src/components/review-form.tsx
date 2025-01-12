@@ -13,15 +13,15 @@ export default function ReviewForm() {
     const { value } = e.target;
     setReviewData({ ...reviewData, rating: Number(value) });
   };
-
   const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setReviewData({ ...reviewData, review: value });
   };
+  const validateReview = (({rating, review}: { rating: number; review: string }) => rating !== 0 && review.length >= 50 && review.length <= 300);
   const sendReview = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (reviewData.review.length < 50 || reviewData.rating === 0) {
+    if (!validateReview(reviewData)) {
       return;
     }
     dispatch(sendReviewAction(reviewData));
@@ -82,13 +82,14 @@ export default function ReviewForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
       />
       {reviewData.review.length < 50 && <p className="reviews__error">Comment too short</p>}
+      {reviewData.review.length > 300 && <p className="reviews__error">Comment too long</p>}
       {reviewData.rating === 0 && <p className="reviews__error">Rating not set</p>}
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
         To submit review please make sure to set <span className="reviews__star">rating</span> and describe
         your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={false}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!validateReview(reviewData)}>Submit</button>
       </div>
     </form>
   );
