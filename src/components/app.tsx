@@ -14,9 +14,10 @@ import Layout from './layout.tsx';
 export default function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(checkAuthAction());
-    dispatch(fetchOffersAction());
-    dispatch(fetchFavoritesAction());
+    dispatch(checkAuthAction()).finally(() => {
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoritesAction());
+    });
   });
 
   return (
